@@ -8,35 +8,60 @@ const sources = {
   createBtn: document.querySelector("[data-create]"),
   destroyBtn: document.querySelector("[data-destroy]"),
 };
-console.log(sources.createBtn);
 
-const boxesArray = [];
+// empty array for created boxes
+let boxesArray = [];
+
+// body of create fn
 const createBoxes = (amount) => {
-  let createdBox = document.createElement("div");
-  boxesArray.push(createdBox);
+  boxesArray.push(document.createElement("div"));
 
   if (amount - 1 >= 1) {
     createBoxes((amount -= 1));
   }
 };
 
+// body of render fn: create + styles + render
 const renderBoxes = () => {
-  sources.boxesBunch.innerHTML = "";
-  sources.input.value = 0;
+  boxesArray = [];
 
   createBoxes(sources.input.value);
 
   let boxesStr = "";
+
+  let boxesNum = sources.boxesBunch.children;
+
+  // If блок ниже считает сколько боксов уже есть в DOMе,
+  // чтоб определить к какому начальному параметру приплюсовать +10рх для ширины и высоты следующих боксов.
+  // Какой-то метод попроще и попонятней не придумала. Может вы знаете
+  let i;
+  if (boxesNum.length >= 1) {
+    i = (boxesNum.length - 1) * 10 + 30;
+  } else {
+    i = 20;
+  }
+
+  // +10рх for each next box
   boxesArray.forEach((el) => {
-    el.style.width = "30px";
-    el.style.height = "30px";
+    el.style.width = `${(i += 10)}px`;
+    el.style.height = `${i}px`;
+
     el.style.backgroundColor = getRandomHexColor();
+
+    // transform all boxes in memory to string for rendering in 1 click
     boxesStr += el.outerHTML;
   });
 
-  // let boxesInStr = boxesArray.join("");
+  // render
   sources.boxesBunch.insertAdjacentHTML("beforeend", boxesStr);
 };
 
 sources.createBtn.addEventListener("click", renderBoxes);
 // destroyBtn.addEventListener("click", destroyBoxes);
+
+const destroyBoxes = () => {
+  sources.boxesBunch.innerHTML = "";
+  sources.input.value = "";
+};
+
+sources.destroyBtn.addEventListener("click", destroyBoxes);

@@ -4,13 +4,12 @@ const threshold = input.getAttribute("data-length");
 // Callback body
 const checkLengthFn = () => {
   let enteredSymbLength = input.value.length;
-
-  input.classList.add("valid");
-
   if (enteredSymbLength < threshold) {
-    input.classList.replace("valid", "invalid");
+    input.classList.add("invalid");
+  } else {
+    input.classList.replace("invalid", "valid");
   }
 };
 
-//EventListener
+// Call
 input.addEventListener("blur", checkLengthFn);

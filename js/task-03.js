@@ -14,18 +14,11 @@ const images = [
 ];
 const list = document.querySelector(".gallery");
 
-let items = [];
-
-images.map(({ url, alt }) => {
-  // string template sreation
-  const item = `<li><img src="${url}" alt="${alt}" /></li>`;
-
-  // string templates into one array [items]
-  items.push(item);
-});
-
-// get rid of commas
-const ItemsInStr = items.join("");
+const ItemsInStr = images
+  .map(({ url, alt }) => {
+    return `<li><img src="${url}" alt="${alt}" /></li>`;
+  })
+  .join("");
 
 // Insert to DOM
 list.insertAdjacentHTML("beforeend", ItemsInStr);

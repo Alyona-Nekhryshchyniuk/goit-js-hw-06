@@ -12,9 +12,7 @@ increm.addEventListener("click", upValueBtnClick);
 
 // Logic for ↓
 const downValueBtnClick = () => {
-  if (counterValue !== 0) {
-    counterValue -= 1;
-  }
+  counterValue -= 1;
   value.textContent = counterValue;
 };
 decrem.addEventListener("click", downValueBtnClick);

@@ -8,21 +8,15 @@ const ingredients = [
 ];
 const list = document.querySelector("#ingredients");
 const array = [];
-let stringifiedItems = "";
 
 ingredients.forEach((el) => {
   const item = document.createElement("li");
 
   // Add classes and text for items
-  item.classList.add(`${el}`);
-  item.innerHTML = `${el}`;
+  item.classList.add("item");
+  item.textContent = `${el}`;
 
-  // array of stringified li items
-  array.push(`${item.outerHTML}`);
+  array.push(item);
 });
 
-// Get rid of commas
-stringifiedItems += array.join("");
-
-// insert items to DOM
-list.insertAdjacentHTML("beforeend", stringifiedItems);
+list.append(...array);

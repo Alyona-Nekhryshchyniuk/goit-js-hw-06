@@ -5,11 +5,13 @@ function getRandomHexColor() {
 const sources = {
   body: document.querySelector("body"),
   btn: document.querySelector("button"),
-  colorName: document.querySelector("span"),
+  span: document.querySelector("span"),
 };
 
 const changeBgcOnClick = () => {
-  sources.body.style.backgroundColor = getRandomHexColor();
+  let color = getRandomHexColor();
+  sources.body.style.backgroundColor = color;
+  sources.span.textContent = `${color}`;
 };
 
 sources.btn.addEventListener("click", changeBgcOnClick);
